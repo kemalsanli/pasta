@@ -1,2 +1,2 @@
-# paste
-Paste is clipboard application for ios devices.
+# pasta
+Pasta is clipboard application for ios devices.
