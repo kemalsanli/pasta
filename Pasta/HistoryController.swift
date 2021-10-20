@@ -54,9 +54,44 @@ class HistoryController: UITableViewController {
         }
 
     @IBAction func wipeButton(_ sender: Any) {
-        alertControllerFunc("Are you sure ?", "This operation will", "Cancel","Wipe", entityWiper(_:))
+        alertControllerFunc("Are you sure ?", "This operation will wipe your history", "Cancel","Wipe", entityWiper(_:))
     }
+    
+    func deleteEntry(_ date:Date){
+        //As we know that container is set up in the AppDelegates so we need to refer that container.
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                
+                //We need to create a context from this container
+                let managedContext = appDelegate.persistentContainer.viewContext
+                
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "History")
+        fetchRequest.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+               
+                do
+                {
+                    let test = try managedContext.fetch(fetchRequest)
+                    
+                    let objectToDelete = test[0] as! NSManagedObject
+                    managedContext.delete(objectToDelete)
+                    
+                    do{
+                        try managedContext.save()
+                        readDb()
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
+                    
+                }
+                catch
+                {
+                    print(error)
+                }
+    }
+    
     func entityWiper( _ action:UIAlertAction! = nil){
+        //Actually swift forces me to write "History" manually because of the idiotic uialertaction requirement....
         let appDel:AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
             let context:NSManagedObjectContext = appDel.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "History")
@@ -77,10 +112,11 @@ class HistoryController: UITableViewController {
     }
     func alertControllerFunc( _ title:String, _ message:String, _ buttonLabel: String,_ cancelButton:String? = nil, _ action: ((UIAlertAction) -> Void)? = nil) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: buttonLabel, style: .default, handler: nil))
         if let cancelTitle = cancelButton{
             ac.addAction(UIAlertAction(title: cancelTitle, style: .destructive, handler: action))
         }
+        ac.addAction(UIAlertAction(title: buttonLabel, style: .default, handler: nil))
+        
         present(ac, animated: true)
     }
     // MARK: - Table view data source
