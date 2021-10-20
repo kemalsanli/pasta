@@ -1,10 +1,6 @@
 # pasta
 Pasta is clipboard application for ios devices.
 
-## Açıklama
-
-YMGK2 Uygulamasının telefon ve bilgisayarlarda çalışmasını sağlayan istemci uygulaması.
-
 ## Starting
 
 ### Requirements
