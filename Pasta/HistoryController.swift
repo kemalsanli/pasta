@@ -54,7 +54,7 @@ class HistoryController: UITableViewController {
         }
 
     @IBAction func wipeButton(_ sender: Any) {
-        alertControllerFunc("Are you sure ?", "This operation will", "Wipe","Cancel", entityWiper(_:))
+        alertControllerFunc("Are you sure ?", "This operation will", "Cancel","Wipe", entityWiper(_:))
     }
     func entityWiper( _ action:UIAlertAction! = nil){
         let appDel:AppDelegate = (UIApplication.shared.delegate as! AppDelegate)
@@ -77,7 +77,7 @@ class HistoryController: UITableViewController {
     }
     func alertControllerFunc( _ title:String, _ message:String, _ buttonLabel: String,_ cancelButton:String? = nil, _ action: ((UIAlertAction) -> Void)? = nil) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: buttonLabel, style: .default, handler: action))
+        ac.addAction(UIAlertAction(title: buttonLabel, style: .default, handler: nil))
         if let cancelTitle = cancelButton{
             ac.addAction(UIAlertAction(title: cancelTitle, style: .destructive, handler: action))
         }
