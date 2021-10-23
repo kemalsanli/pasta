@@ -22,6 +22,7 @@
 		0A10CFB4271F7EFF0066A7DD /* CraftyGirls-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A10CFB3271F7EFF0066A7DD /* CraftyGirls-Regular.ttf */; };
 		0A10CFB8271FAB160066A7DD /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB7271FAB160066A7DD /* HistoryController.swift */; };
 		0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB9271FAE820066A7DD /* HistoryCell.swift */; };
+		0A64477D272465A700FD18AA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64477C272465A700FD18AA /* FavoritesController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		0A10CFB3271F7EFF0066A7DD /* CraftyGirls-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CraftyGirls-Regular.ttf"; sourceTree = "<group>"; };
 		0A10CFB7271FAB160066A7DD /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		0A10CFB9271FAE820066A7DD /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		0A64477C272465A700FD18AA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				0A10CFB7271FAB160066A7DD /* HistoryController.swift */,
 				0A10CFB9271FAE820066A7DD /* HistoryCell.swift */,
 				0A10CF81271F55890066A7DD /* Main.storyboard */,
+				0A64477C272465A700FD18AA /* FavoritesController.swift */,
 				0A10CF87271F558C0066A7DD /* Assets.xcassets */,
 				0A10CF89271F558C0066A7DD /* LaunchScreen.storyboard */,
 				0A10CF8C271F558C0066A7DD /* Info.plist */,
@@ -289,6 +292,7 @@
 				0A10CF80271F55890066A7DD /* MainController.swift in Sources */,
 				0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */,
 				0A10CFAF271F60440066A7DD /* PastaCell.swift in Sources */,
+				0A64477D272465A700FD18AA /* FavoritesController.swift in Sources */,
 				0A10CF7C271F55890066A7DD /* AppDelegate.swift in Sources */,
 				0A10CF7E271F55890066A7DD /* SceneDelegate.swift in Sources */,
 				0A10CFB8271FAB160066A7DD /* HistoryController.swift in Sources */,

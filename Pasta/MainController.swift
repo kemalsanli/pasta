@@ -13,7 +13,7 @@ struct pastaBody {
     var pasta:String
 }
 
-class MainController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class MainController: UIViewController{
     var fontNames = ["Prata-Regular","CraftyGirls-Regular"]
     @IBOutlet weak var PastaTableView: UITableView!
     var pastaBodies = [pastaBody]()
@@ -22,22 +22,6 @@ class MainController: UIViewController,UITableViewDataSource, UITableViewDelegat
         setOptions()
         PastaTableView.delegate = self
         PastaTableView.dataSource = self
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pastaBodies.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = PastaTableView.dequeueReusableCell(withIdentifier: "PastaCell", for: indexPath) as! PastaCell
-        cell.selectionStyle = .none
-        cell.pastaLabel.text = pastaBodies[indexPath.row].pasta
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        cell.hourLabel.text = dateFormatter.string(from: pastaBodies[indexPath.row].date)
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIPasteboard.general.string = pastaBodies[indexPath.row].pasta
     }
 
     @IBAction func copyClipboardButton(_ sender: Any) {
@@ -53,10 +37,8 @@ class MainController: UIViewController,UITableViewDataSource, UITableViewDelegat
         self.navigationItem.title = "Pasta"
         let navBar = UINavigationBarAppearance()
         navBar.backgroundColor = UIColor(named: "NavBarColors")
+        
         navBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont(name: fontNames.randomElement()!, size: 30)!]
-        
-        
-        navigationController?.navigationBar.barStyle = .black
         //Şeffaflık kapat // rgb doğru kullan
         navigationController?.navigationBar.isTranslucent = false
         
@@ -97,3 +79,22 @@ class MainController: UIViewController,UITableViewDataSource, UITableViewDelegat
 
 }
 
+//Tableview
+extension MainController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pastaBodies.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = PastaTableView.dequeueReusableCell(withIdentifier: "PastaCell", for: indexPath) as! PastaCell
+        cell.selectionStyle = .none
+        cell.pastaLabel.text = pastaBodies[indexPath.row].pasta
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        cell.hourLabel.text = dateFormatter.string(from: pastaBodies[indexPath.row].date)
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIPasteboard.general.string = pastaBodies[indexPath.row].pasta
+    }
+}

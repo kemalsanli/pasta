@@ -27,7 +27,11 @@ class PastaCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        let alpha2 = pastaLabel.alpha
+        pastaLabel.alpha = 0
+        UIView.animate(withDuration: 0.25){
+            self.pastaLabel.alpha = alpha2
+        }
+        
     }
-
 }

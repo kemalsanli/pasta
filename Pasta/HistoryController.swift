@@ -9,12 +9,15 @@ import UIKit
 import CoreData
 
 class HistoryController: UITableViewController {
+
+    
     
     var pastaHistory = [pastaBody]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setOptions()
         readDb()
+        print("selamma")
     }
     func setOptions(){
         self.navigationItem.title = "History"
@@ -121,6 +124,19 @@ class HistoryController: UITableViewController {
     }
     // MARK: - Table view data source
 
+}
+
+extension HistoryController: HistoryCellProtocol {
+    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let silAction = UIContextualAction(style: .destructive, title: "Sil"){ [weak self] (UIContextualAction, view, boolValue) in
+            self?.pastaHistory.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return UISwipeActionsConfiguration(actions: [silAction])
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -136,10 +152,13 @@ class HistoryController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
         cell.pastaLabel.text = pastaHistory[indexPath.row].pasta
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateFormat = "HH:mm"
         cell.hourLabel.text = dateFormatter.string(from: pastaHistory[indexPath.row].date)
         dateFormatter.dateFormat = "MMM d, yyyy"
         cell.dateLabel.text = dateFormatter.string(from: pastaHistory[indexPath.row].date)
+        
+        cell.HistoryCellProtocol = self
+        cell.indexPath = indexPath
 
 
         return cell
@@ -149,49 +168,38 @@ class HistoryController: UITableViewController {
         tableView.reloadData()
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func buttonClicked(indexPath: IndexPath) {
+        let ac = UIAlertController(title: "Add To Favorites", message: "This action will add this pasta to your favourites", preferredStyle: .alert)
+        ac.addTextField{ textField in textField.placeholder = "Add a title for your favourite"}
+        
+        ac.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
+            if let textField = ac.textFields![0].text{
+                if textField != ""{
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+                    let db = appDelegate.persistentContainer.viewContext
+
+                    let newPasta = NSEntityDescription.entity(forEntityName: "Favorites", in: db)!
+
+                        let pasta = NSManagedObject(entity: newPasta, insertInto: db)
+                    pasta.setValue(self?.pastaHistory[indexPath.row].pasta, forKey: "pasta")
+                    pasta.setValue(self?.pastaHistory[indexPath.row].date, forKey: "date")
+                    pasta.setValue(textField, forKey: "pastaName")
+
+                    
+                    do {
+                        try db.save()
+                       
+                    } catch let error as NSError {
+                        print("havin some issues \(error), \(error.userInfo)")
+                    }
+                }
+            }
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        
+        
+        
+        present(ac, animated: true)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
