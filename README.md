@@ -39,13 +39,16 @@ Still not came across specific issue,
 * Basic and super quick ui.
 * Copy/Paste history.
 * Dark mode support.
+* Favorites.
 * 3D Touch support(Soon)
-* Favourites(Soon)
 * More basic and more animated ui(Soon)
 * And nothing more, app will be simple.
 
 
 ## Version History
+
+* 0.2
+    * Nearly done.
 
 * 0.1
     * Released.
