@@ -38,10 +38,10 @@ extension FavoritesController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 20, 0)
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 5, 0)
         cell.layer.transform = rotationTransform
         cell.alpha = 0
-        UIView.animate(withDuration: 0.50){
+        UIView.animate(withDuration: 0.20){
             cell.layer.transform = CATransform3DIdentity
             cell.alpha = 1.0
         }
@@ -58,7 +58,7 @@ extension FavoritesController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIPasteboard.general.string = favList[indexPath.row].pasta
-        print("Selected")
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavCell", for: indexPath) as! FavCell
@@ -69,6 +69,7 @@ extension FavoritesController {
         cell.hourLabel.text = dateFormatter.string(from: favList[indexPath.row].date ?? Date())
         dateFormatter.dateFormat = "dd.MM.YYYY"
         cell.dateLabel.text = dateFormatter.string(from: favList[indexPath.row].date ?? Date())
+        cell.selectionStyle = .none
         return cell
     }
 }

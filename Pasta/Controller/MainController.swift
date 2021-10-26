@@ -24,6 +24,22 @@ class MainController: UIViewController{
         setOptions()
         PastaTableView.delegate = self
         PastaTableView.dataSource = self
+        addRefreshControl()
+    }
+    func addRefreshControl(){
+        PastaTableView.refreshControl = UIRefreshControl()
+        PastaTableView.refreshControl?.addTarget(self, action: #selector(pullToWipe), for: .valueChanged)
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        let attributedTitle = NSAttributedString(string: "Pull To Clear", attributes: attributes)
+        PastaTableView.refreshControl?.attributedTitle = attributedTitle
+    }
+    @objc func pullToWipe(){
+        PastaTableView.refreshControl?.endRefreshing()
+        for _ in 0..<pastaBodies.count{
+                self.pastaBodies.remove(at: 0)
+                self.PastaTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+        }
+        
     }
 
     @IBAction func copyClipboardButton(_ sender: Any) {
@@ -76,6 +92,7 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIPasteboard.general.string = pastaBodies[indexPath.row].pasta
+        PastaTableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 

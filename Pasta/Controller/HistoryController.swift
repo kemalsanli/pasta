@@ -16,6 +16,7 @@ class HistoryController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         readDb()
+        addRefreshControl()
     }
 
     func readDb() {
@@ -70,10 +71,10 @@ class HistoryController: UITableViewController {
 extension HistoryController: HistoryCellProtocol {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 10, 0)
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 5, 0)
         cell.layer.transform = rotationTransform
         cell.alpha = 0
-        UIView.animate(withDuration: 0.30){
+        UIView.animate(withDuration: 0.10){
             cell.layer.transform = CATransform3DIdentity
             cell.alpha = 1.0
         }
@@ -118,6 +119,7 @@ extension HistoryController: HistoryCellProtocol {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIPasteboard.general.string = pastaHistory[indexPath.row].pasta
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     func buttonClicked(indexPath: IndexPath) {
@@ -149,6 +151,23 @@ extension HistoryController: HistoryCellProtocol {
         fav.pasta = pasta
         fav.date = date
         appDelegate.saveContext()
+    }
+    
+    func addRefreshControl(){
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToWipe), for: .valueChanged)
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        let attributedTitle = NSAttributedString(string: "Pull To Wipe History", attributes: attributes)
+        tableView.refreshControl?.attributedTitle = attributedTitle
+    }
+    @objc func pullToWipe(){
+        tableView.refreshControl?.endRefreshing()
+        entityWiper(nil)
+        for _ in 0..<pastaHistory.count{
+                self.pastaHistory.remove(at: 0)
+                self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+        }
+        
     }
 }
 
