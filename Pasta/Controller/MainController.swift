@@ -8,12 +8,14 @@
 import UIKit
 import CoreData
 
+
 struct pastaBody {
     var date:Date
     var pasta:String
 }
 
 class MainController: UIViewController{
+    let context = appDelegate.persistentContainer.viewContext
     var fontNames = ["Prata-Regular","CraftyGirls-Regular"]
     @IBOutlet weak var PastaTableView: UITableView!
     var pastaBodies = [pastaBody]()
@@ -33,46 +35,24 @@ class MainController: UIViewController{
             }
         }
     }
-    func setOptions(){
-        self.navigationItem.title = "Pasta"
-        let navBar = UINavigationBarAppearance()
-        navBar.backgroundColor = UIColor(named: "NavBarColors")
-        
-        navBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont(name: fontNames.randomElement()!, size: 30)!]
-        //Şeffaflık kapat // rgb doğru kullan
-        navigationController?.navigationBar.isTranslucent = false
-        
-        navigationController?.navigationBar.standardAppearance = navBar
-        navigationController?.navigationBar.compactAppearance = navBar
-        navigationController?.navigationBar.scrollEdgeAppearance = navBar
-    }
     
     @IBAction func historyButton(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "HistoryController") as? HistoryController {
         navigationController?.pushViewController(vc, animated: true)
         }
     }
+    @IBAction func favoritesButton(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "FavController") as? FavoritesController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
 
     func newHistoryPasta(_ pastaM:String,_ date:Date){
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-
-        let db = appDelegate.persistentContainer.viewContext
-
-        let newPasta = NSEntityDescription.entity(forEntityName: "History", in: db)!
-
-            let pasta = NSManagedObject(entity: newPasta, insertInto: db)
-            pasta.setValue("\(pastaM)", forKey: "pasta")
-            pasta.setValue(date, forKey: "date")
-
-        
-        do {
-            try db.save()
-           
-        } catch let error as NSError {
-            print("havin some issues \(error), \(error.userInfo)")
-        }
+        let history = History(context: context)
+        history.pasta = pastaM
+        history.date = date
+        appDelegate.saveContext()
     }
 
 
@@ -96,5 +76,22 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIPasteboard.general.string = pastaBodies[indexPath.row].pasta
+    }
+}
+
+//first use options
+extension MainController {
+    func setOptions(){
+        self.navigationItem.title = "Pasta"
+        let navBar = UINavigationBarAppearance()
+        navBar.backgroundColor = UIColor(named: "NavBarColors")
+        
+        navBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont(name: fontNames.randomElement()!, size: 30)!]
+        //Şeffaflık kapat // rgb doğru kullan
+        navigationController?.navigationBar.isTranslucent = false
+        
+        navigationController?.navigationBar.standardAppearance = navBar
+        navigationController?.navigationBar.compactAppearance = navBar
+        navigationController?.navigationBar.scrollEdgeAppearance = navBar
     }
 }

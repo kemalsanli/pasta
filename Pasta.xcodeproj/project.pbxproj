@@ -23,6 +23,7 @@
 		0A10CFB8271FAB160066A7DD /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB7271FAB160066A7DD /* HistoryController.swift */; };
 		0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB9271FAE820066A7DD /* HistoryCell.swift */; };
 		0A64477D272465A700FD18AA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64477C272465A700FD18AA /* FavoritesController.swift */; };
+		0ACA1E562727EEA50093E48B /* FavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA1E552727EEA50093E48B /* FavCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		0A10CFB7271FAB160066A7DD /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		0A10CFB9271FAE820066A7DD /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		0A64477C272465A700FD18AA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		0ACA1E552727EEA50093E48B /* FavCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,14 +115,11 @@
 		0A10CF7A271F55890066A7DD /* Pasta */ = {
 			isa = PBXGroup;
 			children = (
+				0ACA1E582727EF1A0093E48B /* Controller */,
+				0ACA1E572727EF080093E48B /* Cell */,
 				0A10CF7B271F55890066A7DD /* AppDelegate.swift */,
 				0A10CF7D271F55890066A7DD /* SceneDelegate.swift */,
-				0A10CF7F271F55890066A7DD /* MainController.swift */,
-				0A10CFAE271F60440066A7DD /* PastaCell.swift */,
-				0A10CFB7271FAB160066A7DD /* HistoryController.swift */,
-				0A10CFB9271FAE820066A7DD /* HistoryCell.swift */,
 				0A10CF81271F55890066A7DD /* Main.storyboard */,
-				0A64477C272465A700FD18AA /* FavoritesController.swift */,
 				0A10CF87271F558C0066A7DD /* Assets.xcassets */,
 				0A10CF89271F558C0066A7DD /* LaunchScreen.storyboard */,
 				0A10CF8C271F558C0066A7DD /* Info.plist */,
@@ -154,6 +153,26 @@
 				0A10CFB1271F7B480066A7DD /* Prata-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0ACA1E572727EF080093E48B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0ACA1E552727EEA50093E48B /* FavCell.swift */,
+				0A10CFB9271FAE820066A7DD /* HistoryCell.swift */,
+				0A10CFAE271F60440066A7DD /* PastaCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0ACA1E582727EF1A0093E48B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0A64477C272465A700FD18AA /* FavoritesController.swift */,
+				0A10CFB7271FAB160066A7DD /* HistoryController.swift */,
+				0A10CF7F271F55890066A7DD /* MainController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A10CF80271F55890066A7DD /* MainController.swift in Sources */,
+				0ACA1E562727EEA50093E48B /* FavCell.swift in Sources */,
 				0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */,
 				0A10CFAF271F60440066A7DD /* PastaCell.swift in Sources */,
 				0A64477D272465A700FD18AA /* FavoritesController.swift in Sources */,
