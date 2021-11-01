@@ -64,11 +64,38 @@ class HistoryController: UITableViewController {
         
         present(ac, animated: true)
     }
-    // MARK: - Table view data source
-
+    
+    func addToFavorites(_ pastaO:String?,_ dateO:Date?,_ pastaNameO:String?){
+        guard let pastaName = pastaNameO else {return}
+        guard let pasta = pastaO else {return}
+        guard let date = dateO else {return}
+        
+        let fav = Favorites(context: context)
+        fav.pastaName = pastaName
+        fav.pasta = pasta
+        fav.date = date
+        appDelegate.saveContext()
+    }
+    
+    func addRefreshControl(){
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToWipe), for: .valueChanged)
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        let attributedTitle = NSAttributedString(string: "Pull To Wipe History", attributes: attributes)
+        tableView.refreshControl?.attributedTitle = attributedTitle
+    }
+    @objc func pullToWipe(){
+        tableView.refreshControl?.endRefreshing()
+        entityWiper(nil)
+        for _ in 0..<pastaHistory.count{
+                self.pastaHistory.remove(at: 0)
+                self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+        }
+        
+    }
 }
-
-extension HistoryController: HistoryCellProtocol {
+// MARK: - Table view data source
+extension HistoryController{
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 5, 0)
@@ -121,7 +148,9 @@ extension HistoryController: HistoryCellProtocol {
         UIPasteboard.general.string = pastaHistory[indexPath.row].pasta
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
-    
+}
+
+extension HistoryController: HistoryCellProtocol {
     func buttonClicked(indexPath: IndexPath) {
         let ac = UIAlertController(title: "Add To Favorites", message: "This action will add this pasta to your favourites", preferredStyle: .alert)
         ac.addTextField{ textField in textField.placeholder = "Add a title for your favourite"}
@@ -141,33 +170,4 @@ extension HistoryController: HistoryCellProtocol {
         
         present(ac, animated: true)
     }
-    func addToFavorites(_ pastaO:String?,_ dateO:Date?,_ pastaNameO:String?){
-        guard let pastaName = pastaNameO else {return}
-        guard let pasta = pastaO else {return}
-        guard let date = dateO else {return}
-        
-        let fav = Favorites(context: context)
-        fav.pastaName = pastaName
-        fav.pasta = pasta
-        fav.date = date
-        appDelegate.saveContext()
-    }
-    
-    func addRefreshControl(){
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(pullToWipe), for: .valueChanged)
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
-        let attributedTitle = NSAttributedString(string: "Pull To Wipe History", attributes: attributes)
-        tableView.refreshControl?.attributedTitle = attributedTitle
-    }
-    @objc func pullToWipe(){
-        tableView.refreshControl?.endRefreshing()
-        entityWiper(nil)
-        for _ in 0..<pastaHistory.count{
-                self.pastaHistory.remove(at: 0)
-                self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-        }
-        
-    }
 }
-

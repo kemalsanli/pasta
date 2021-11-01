@@ -23,6 +23,8 @@
 		0A10CFB8271FAB160066A7DD /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB7271FAB160066A7DD /* HistoryController.swift */; };
 		0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10CFB9271FAE820066A7DD /* HistoryCell.swift */; };
 		0A64477D272465A700FD18AA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64477C272465A700FD18AA /* FavoritesController.swift */; };
+		0AA4E5DD272F91F0007B23E6 /* EditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4E5DC272F91F0007B23E6 /* EditingController.swift */; };
+		0AA4E5DF272F969A007B23E6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4E5DE272F969A007B23E6 /* Extensions.swift */; };
 		0ACA1E562727EEA50093E48B /* FavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA1E552727EEA50093E48B /* FavCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		0A10CFB7271FAB160066A7DD /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		0A10CFB9271FAE820066A7DD /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		0A64477C272465A700FD18AA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		0AA4E5DC272F91F0007B23E6 /* EditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingController.swift; sourceTree = "<group>"; };
+		0AA4E5DE272F969A007B23E6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0ACA1E552727EEA50093E48B /* FavCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +123,7 @@
 				0ACA1E572727EF080093E48B /* Cell */,
 				0A10CF7B271F55890066A7DD /* AppDelegate.swift */,
 				0A10CF7D271F55890066A7DD /* SceneDelegate.swift */,
+				0AA4E5DE272F969A007B23E6 /* Extensions.swift */,
 				0A10CF81271F55890066A7DD /* Main.storyboard */,
 				0A10CF87271F558C0066A7DD /* Assets.xcassets */,
 				0A10CF89271F558C0066A7DD /* LaunchScreen.storyboard */,
@@ -171,6 +176,7 @@
 				0A64477C272465A700FD18AA /* FavoritesController.swift */,
 				0A10CFB7271FAB160066A7DD /* HistoryController.swift */,
 				0A10CF7F271F55890066A7DD /* MainController.swift */,
+				0AA4E5DC272F91F0007B23E6 /* EditingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA4E5DD272F91F0007B23E6 /* EditingController.swift in Sources */,
 				0A10CF80271F55890066A7DD /* MainController.swift in Sources */,
 				0ACA1E562727EEA50093E48B /* FavCell.swift in Sources */,
 				0A10CFBA271FAE820066A7DD /* HistoryCell.swift in Sources */,
@@ -316,6 +323,7 @@
 				0A10CF7C271F55890066A7DD /* AppDelegate.swift in Sources */,
 				0A10CF7E271F55890066A7DD /* SceneDelegate.swift in Sources */,
 				0A10CFB8271FAB160066A7DD /* HistoryController.swift in Sources */,
+				0AA4E5DF272F969A007B23E6 /* Extensions.swift in Sources */,
 				0A10CF86271F55890066A7DD /* Pasta.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,11 +501,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68W97V5J84;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pasta/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = pasta;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -521,11 +531,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68W97V5J84;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pasta/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = pasta;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

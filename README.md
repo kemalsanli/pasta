@@ -20,7 +20,8 @@ git clone https://github.com/kemalsanli/pasta.git
 
 Still not came across specific issue, 
 ```
-...but this app still not completed yet.
+...but if something goes wrong just restart.
+ 
 ```
 
 ## UI
@@ -31,7 +32,7 @@ Still not came across specific issue,
 
 ![UI 3](https://github.com/kemalsanli/pasta/blob/main/Screenshots/Poster/3.png?raw=true)
 
-![UI 4](https://github.com/kemalsanli/pasta/blob/main/Screenshots/Poster/4.png?raw=true)
+
 
 
 ## Features
@@ -40,12 +41,14 @@ Still not came across specific issue,
 * Copy/Paste history.
 * Dark mode support.
 * Favorites.
-* 3D Touch support(Soon)
-* More basic and more animated ui(Soon)
-* And nothing more, app will be simple.
 
 
 ## Version History
+
+* 0.5
+    * Pasta is now fully functional.
+    * Due to UX concerns force touch support cancelled.
+
 
 * 0.2
     * Nearly done.

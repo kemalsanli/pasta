@@ -16,7 +16,8 @@ struct pastaBody {
 
 class MainController: UIViewController{
     let context = appDelegate.persistentContainer.viewContext
-    var fontNames = ["Prata-Regular","CraftyGirls-Regular"]
+    //var fontNames = ["Prata-Regular","CraftyGirls-Regular"]
+    var fontNames = ["Prata-Regular"]
     @IBOutlet weak var PastaTableView: UITableView!
     var pastaBodies = [pastaBody]()
     override func viewDidLoad() {
@@ -99,7 +100,7 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
 //first use options
 extension MainController {
     func setOptions(){
-        self.navigationItem.title = "Pasta"
+        self.navigationItem.title = "pasta"
         let navBar = UINavigationBarAppearance()
         navBar.backgroundColor = UIColor(named: "NavBarColors")
         
