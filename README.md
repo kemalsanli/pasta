@@ -20,8 +20,7 @@ git clone https://github.com/kemalsanli/pasta.git
 
 Still not came across specific issue, 
 ```
-...but if something goes wrong just restart.
- 
+...but if something goes wrong just restart. 
 ```
 
 ## UI
